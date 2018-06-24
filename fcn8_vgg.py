@@ -61,9 +61,9 @@ class FCN8VGG:
             # assert green.get_shape().as_list()[1:] == [224, 224, 1]
             # assert blue.get_shape().as_list()[1:] == [224, 224, 1]
             bgr = tf.concat([
-                blue - VGG_MEAN[0],
-                green - VGG_MEAN[1],
-                red - VGG_MEAN[2],
+                tf.subtract(blue , VGG_MEAN[0]),
+                tf.subtract(green, VGG_MEAN[1]),
+                tf.subtract(red,VGG_MEAN[2]),
             ], 3)
 
             if debug:
