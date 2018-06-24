@@ -51,7 +51,7 @@ from tensorflow.python.framework import ops
 
 
 with tf.Session() as sess:
-    immy_a,_,immy_a_sem= build_input_image_op(input_list_train)
+    immy_a,_,immy_a_sem= build_input(input_list_train)
     input_images,input_sem_gt = tf.train.shuffle_batch([immy_a,immy_a_sem],batch_size,100,30,8)
     with tf.name_scope("content_vgg"):
         vgg_fcn = fcn8_vgg.FCN8VGG()
