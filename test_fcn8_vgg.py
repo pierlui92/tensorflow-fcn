@@ -3,7 +3,7 @@
 import os
 import scipy as scp
 import scipy.misc
-
+from loss import loss
 import numpy as np
 import logging
 import tensorflow as tf
