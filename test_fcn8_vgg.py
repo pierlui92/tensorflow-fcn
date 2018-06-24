@@ -40,7 +40,7 @@ def build_input(input_list_txt="/home/pier/pier_data/tensorflow-fcn/input_list_t
     dataset = dataset.map(_parse_function)
     dataset = dataset.repeat()
     iterator = dataset.make_one_shot_iterator()
-    return image , image_path, image_sem = iterator.get_next()
+    return iterator.get_next()
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
