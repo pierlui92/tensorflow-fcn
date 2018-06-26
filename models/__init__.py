@@ -1,0 +1,1 @@
+import models.fcn8_vgg, models.fcn16_vgg, models.fcn32_vgg
