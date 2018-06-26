@@ -9,7 +9,7 @@ import logging
 import tensorflow as tf
 import sys
 
-import fcn8_vgg
+import models/fcn8_vgg
 import utils
 
 batch_size=2

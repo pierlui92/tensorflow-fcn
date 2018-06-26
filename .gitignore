@@ -64,3 +64,7 @@ target/
 
 # IDE
 .idea
+
+checkpoint*
+*.pyc
+*.png
