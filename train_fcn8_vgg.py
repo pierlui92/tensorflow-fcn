@@ -73,6 +73,7 @@ with tf.Session() as sess:
     
     with tf.name_scope("content_vgg"):
         vgg_fcn = FCN8VGG()
+        #### RICORDARSI DI REINSERIRE DROPOUT!!! TRAIN=TRUE!! ####
         vgg_fcn.build(input_images, debug=False, num_classes=args.num_classes)
         logits= vgg_fcn.upscore32
         loss = loss(logits,input_sem_gt,19)
@@ -91,7 +92,8 @@ with tf.Session() as sess:
     print('Finished building Network.')
     
     writer = tf.summary.FileWriter(args.checkpoint_dir) 
-    saver = tf.train.Saver(max_to_keep=2, keep_checkpoint_every_n_hours=2)
+    saver = tf.train.Saver(max_to_keep=2)
+    saver_5000 = tf.train.Saver(max_to_keep=0)
 
     init = [tf.global_variables_initializer(),tf.local_variables_initializer()]
     sess.run(init)
@@ -129,7 +131,10 @@ with tf.Session() as sess:
             writer.add_summary(summary_string,step)
             print("Saved image summary",step)
 
-        if step % 1000 ==0:
+        if step % 5000 ==0: 
+            save(sess,saver_5000,os.path.join(args.checkpoint_dir, "fcn8s"),step=step)
+            print("Saved checkpoint ", step)
+        elif step % 1000 ==0:
             save(sess,saver,os.path.join(args.checkpoint_dir, "fcn8s"),step=step)
             print("Saved checkpoint ", step)
         
