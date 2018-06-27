@@ -110,9 +110,9 @@ def load(sess, checkpoint_path):
         ckpt = tf.train.get_checkpoint_state(checkpoint_path)
         if ckpt:
             c=True 
+            model_checkpoint_path = ckpt.model_checkpoint_path            
         else:
             c= False
-        model_checkpoint_path = ckpt.model_checkpoint_path
     else:
         c=True
         model_checkpoint_path = checkpoint_path

@@ -1,0 +1,457 @@
+5000
+
+#######################
+road : 0.9592
+sidewalk : 0.7363
+building : 0.8659
+wall : 0.1353
+fence : 0.3261
+pole : 0.4628
+traffic light : 0.4876
+traffic sign : 0.6041
+vegetation : 0.8845
+terrain : 0.4938
+sky : 0.9088
+person : 0.6903
+rider : 0.2548
+car : 0.8782
+truck : 0.1479
+bus : 0.0947
+train : 0.2178
+motorcycle : 0.1860
+bicycle : 0.6780
+#######################
+mIoU:  0.526949  acc  0.925374
+9000
+
+#######################
+road : 0.9648
+sidewalk : 0.7382
+building : 0.8531
+wall : 0.1841
+fence : 0.2786
+pole : 0.5280
+traffic light : 0.5859
+traffic sign : 0.6862
+vegetation : 0.8760
+terrain : 0.3641
+sky : 0.9207
+person : 0.7094
+rider : 0.4554
+car : 0.8929
+truck : 0.0743
+bus : 0.2248
+train : 0.1276
+motorcycle : 0.2559
+bicycle : 0.6523
+#######################
+mIoU:  0.545909  acc  0.92375
+14000
+
+#######################
+road : 0.9676
+sidewalk : 0.7764
+building : 0.8915
+wall : 0.2632
+fence : 0.4029
+pole : 0.5557
+traffic light : 0.6057
+traffic sign : 0.6906
+vegetation : 0.9013
+terrain : 0.5095
+sky : 0.9327
+person : 0.7475
+rider : 0.5064
+car : 0.9102
+truck : 0.3268
+bus : 0.2445
+train : 0.3081
+motorcycle : 0.4406
+bicycle : 0.7025
+#######################
+mIoU:  0.614919  acc  0.938258
+
+18000
+
+#######################
+road : 0.9661
+sidewalk : 0.7652
+building : 0.8903
+wall : 0.2890
+fence : 0.3707
+pole : 0.5492
+traffic light : 0.5834
+traffic sign : 0.7200
+vegetation : 0.9032
+terrain : 0.5216
+sky : 0.9279
+person : 0.7534
+rider : 0.4925
+car : 0.9054
+truck : 0.2569
+bus : 0.5393
+train : 0.3459
+motorcycle : 0.3525
+bicycle : 0.7136
+#######################
+mIoU:  0.623464  acc  0.939179
+23000
+
+#######################
+road : 0.9711
+sidewalk : 0.7941
+building : 0.8984
+wall : 0.3275
+fence : 0.4667
+pole : 0.5775
+traffic light : 0.6295
+traffic sign : 0.7269
+vegetation : 0.9051
+terrain : 0.5338
+sky : 0.9281
+person : 0.7566
+rider : 0.4970
+car : 0.9189
+truck : 0.4082
+bus : 0.6375
+train : 0.3315
+motorcycle : 0.4382
+bicycle : 0.7252
+#######################
+mIoU:  0.656404  acc  0.944233
+27000
+
+#######################
+road : 0.9707
+sidewalk : 0.7857
+building : 0.8949
+wall : 0.3366
+fence : 0.4258
+pole : 0.5688
+traffic light : 0.6109
+traffic sign : 0.7329
+vegetation : 0.9069
+terrain : 0.5089
+sky : 0.9274
+person : 0.7567
+rider : 0.4904
+car : 0.9219
+truck : 0.4109
+bus : 0.6523
+train : 0.3408
+motorcycle : 0.4304
+bicycle : 0.7244
+#######################
+mIoU:  0.652482  acc  0.943602
+32000
+
+#######################
+road : 0.9715
+sidewalk : 0.7980
+building : 0.8986
+wall : 0.3193
+fence : 0.4379
+pole : 0.5857
+traffic light : 0.6262
+traffic sign : 0.7390
+vegetation : 0.9087
+terrain : 0.5333
+sky : 0.9337
+person : 0.7520
+rider : 0.4949
+car : 0.9160
+truck : 0.4074
+bus : 0.6328
+train : 0.3161
+motorcycle : 0.4166
+bicycle : 0.7313
+#######################
+mIoU:  0.653625  acc  0.944904
+36000
+
+#######################
+road : 0.9714
+sidewalk : 0.7912
+building : 0.8975
+wall : 0.3152
+fence : 0.4688
+pole : 0.5790
+traffic light : 0.6241
+traffic sign : 0.7333
+vegetation : 0.9097
+terrain : 0.5403
+sky : 0.9337
+person : 0.7618
+rider : 0.4969
+car : 0.9160
+truck : 0.4068
+bus : 0.6127
+train : 0.3363
+motorcycle : 0.4278
+bicycle : 0.7280
+#######################
+mIoU:  0.655306  acc  0.94485
+41000
+
+#######################
+road : 0.9708
+sidewalk : 0.7909
+building : 0.8956
+wall : 0.3201
+fence : 0.4460
+pole : 0.5840
+traffic light : 0.6280
+traffic sign : 0.7302
+vegetation : 0.9051
+terrain : 0.5353
+sky : 0.9310
+person : 0.7499
+rider : 0.4878
+car : 0.9161
+truck : 0.3785
+bus : 0.6403
+train : 0.3410
+motorcycle : 0.3426
+bicycle : 0.7135
+#######################
+mIoU:  0.647738  acc  0.943514
+45000
+
+#######################
+road : 0.9721
+sidewalk : 0.7969
+building : 0.8957
+wall : 0.3464
+fence : 0.4492
+pole : 0.5818
+traffic light : 0.6278
+traffic sign : 0.7359
+vegetation : 0.9075
+terrain : 0.5311
+sky : 0.9269
+person : 0.7620
+rider : 0.4967
+car : 0.9185
+truck : 0.3888
+bus : 0.6274
+train : 0.3336
+motorcycle : 0.4260
+bicycle : 0.7323
+#######################
+mIoU:  0.655616  acc  0.944657
+50000
+
+#######################
+road : 0.9714
+sidewalk : 0.7916
+building : 0.8958
+wall : 0.3412
+fence : 0.4556
+pole : 0.5863
+traffic light : 0.6357
+traffic sign : 0.7346
+vegetation : 0.9061
+terrain : 0.5251
+sky : 0.9324
+person : 0.7504
+rider : 0.4812
+car : 0.9178
+truck : 0.3897
+bus : 0.6419
+train : 0.3371
+motorcycle : 0.4165
+bicycle : 0.7173
+#######################
+mIoU:  0.654085  acc  0.94416
+54000
+
+#######################
+road : 0.9665
+sidewalk : 0.7610
+building : 0.8860
+wall : 0.2576
+fence : 0.4202
+pole : 0.5669
+traffic light : 0.6084
+traffic sign : 0.7163
+vegetation : 0.9028
+terrain : 0.4953
+sky : 0.9246
+person : 0.7385
+rider : 0.4650
+car : 0.9006
+truck : 0.3299
+bus : 0.5412
+train : 0.2745
+motorcycle : 0.3346
+bicycle : 0.7079
+#######################
+mIoU:  0.620933  acc  0.938252
+59000
+
+#######################
+road : 0.9719
+sidewalk : 0.7980
+building : 0.8969
+wall : 0.3417
+fence : 0.4663
+pole : 0.5788
+traffic light : 0.6061
+traffic sign : 0.7361
+vegetation : 0.9047
+terrain : 0.5383
+sky : 0.9323
+person : 0.7615
+rider : 0.4857
+car : 0.9184
+truck : 0.4141
+bus : 0.6141
+train : 0.3264
+motorcycle : 0.3988
+bicycle : 0.7265
+#######################
+mIoU:  0.653497  acc  0.944658
+63000
+
+#######################
+road : 0.9704
+sidewalk : 0.7850
+building : 0.8952
+wall : 0.3177
+fence : 0.4359
+pole : 0.5855
+traffic light : 0.6263
+traffic sign : 0.7387
+vegetation : 0.9064
+terrain : 0.5102
+sky : 0.9248
+person : 0.7571
+rider : 0.4873
+car : 0.9171
+truck : 0.3990
+bus : 0.6063
+train : 0.3568
+motorcycle : 0.4059
+bicycle : 0.7262
+#######################
+mIoU:  0.650094  acc  0.943249
+72000
+
+#######################
+road : 0.9726
+sidewalk : 0.8010
+building : 0.8970
+wall : 0.3209
+fence : 0.4508
+pole : 0.5867
+traffic light : 0.6269
+traffic sign : 0.7382
+vegetation : 0.9088
+terrain : 0.5430
+sky : 0.9318
+person : 0.7554
+rider : 0.4790
+car : 0.9186
+truck : 0.4116
+bus : 0.5919
+train : 0.3293
+motorcycle : 0.4001
+bicycle : 0.7311
+#######################
+mIoU:  0.652358  acc  0.945132
+77000
+
+#######################
+road : 0.9703
+sidewalk : 0.7875
+building : 0.8950
+wall : 0.2902
+fence : 0.4651
+pole : 0.5790
+traffic light : 0.6206
+traffic sign : 0.7398
+vegetation : 0.9082
+terrain : 0.5444
+sky : 0.9288
+person : 0.7606
+rider : 0.4981
+car : 0.9138
+truck : 0.3347
+bus : 0.5958
+train : 0.3774
+motorcycle : 0.3788
+bicycle : 0.7237
+#######################
+mIoU:  0.647997  acc  0.943527
+81000
+
+#######################
+road : 0.9727
+sidewalk : 0.8047
+building : 0.8971
+wall : 0.3222
+fence : 0.4531
+pole : 0.5931
+traffic light : 0.6319
+traffic sign : 0.7459
+vegetation : 0.9098
+terrain : 0.5426
+sky : 0.9264
+person : 0.7544
+rider : 0.4535
+car : 0.9203
+truck : 0.3938
+bus : 0.6051
+train : 0.3544
+motorcycle : 0.4053
+bicycle : 0.7311
+#######################
+mIoU:  0.653558  acc  0.94558
+86000
+
+#######################
+road : 0.9723
+sidewalk : 0.7994
+building : 0.8969
+wall : 0.3249
+fence : 0.4722
+pole : 0.5867
+traffic light : 0.6329
+traffic sign : 0.7424
+vegetation : 0.9079
+terrain : 0.5576
+sky : 0.9319
+person : 0.7616
+rider : 0.4896
+car : 0.9204
+truck : 0.3634
+bus : 0.6263
+train : 0.3698
+motorcycle : 0.4147
+bicycle : 0.7319
+#######################
+mIoU:  0.658043  acc  0.945137
+89000
+
+#######################
+road : 0.9735
+sidewalk : 0.8046
+building : 0.8976
+wall : 0.3313
+fence : 0.4558
+pole : 0.5916
+traffic light : 0.6323
+traffic sign : 0.7429
+vegetation : 0.9104
+terrain : 0.5562
+sky : 0.9281
+person : 0.7570
+rider : 0.4801
+car : 0.9198
+truck : 0.3420
+bus : 0.6371
+train : 0.3739
+motorcycle : 0.4174
+bicycle : 0.7350
+#######################
+mIoU:  0.657181  acc  0.945992

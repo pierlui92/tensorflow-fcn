@@ -130,7 +130,7 @@ with tf.Session() as sess:
             print("Saved image summary",step)
 
         if step % 1000 ==0:
-            save(sess,saver,os.path.join("checkpoint", "fcn8s"),step=step)
+            save(sess,saver,os.path.join(args.checkpoint_dir, "fcn8s"),step=step)
             print("Saved checkpoint ", step)
         
     coord.request_stop()
