@@ -69,7 +69,7 @@ with tf.Session() as sess:
         image = tf.image.crop_to_bounding_box(image, crop_offset_h, crop_offset_w, args.crop_size_h, args.crop_size_w)          
         image_sem = tf.image.crop_to_bounding_box(image_sem, crop_offset_h, crop_offset_w, args.crop_size_h, args.crop_size_w)          
 
-    input_images,input_sem_gt = tf.train.shuffle_batch([image,image_sem],args.batch_size,100,30,8)
+    input_images,input_sem_gt = tf.train.shuffle_batch([image,image_sem],args.batch_size,30,10,8)
     
     with tf.name_scope("content_vgg"):
         vgg_fcn = FCN8VGG()
