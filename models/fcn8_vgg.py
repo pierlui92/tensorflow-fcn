@@ -15,7 +15,7 @@ VGG_MEAN = [103.939, 116.779, 123.68]
 
 class FCN8VGG:
 
-    def __init__(self, vgg16_npy_path=None):
+    def __init__(self, vgg16_npy_path=None, summary=False):
         if vgg16_npy_path is None:
             path = sys.modules[self.__class__.__module__].__file__
             # print path
@@ -29,7 +29,7 @@ class FCN8VGG:
                            "ftp://mi.eng.cam.ac.uk/pub/mttt2/"
                            "models/vgg16.npy"), vgg16_npy_path)
             sys.exit(1)
-
+        self.summary=summary
         self.data_dict = np.load(vgg16_npy_path, encoding='latin1').item()
         self.wd = 5e-4
         print("npy file loaded")
@@ -183,7 +183,7 @@ class FCN8VGG:
 
             relu = tf.nn.relu(bias)
             # Add summary to Tensorboard
-            _activation_summary(relu)
+            _activation_summary(relu,self.summary)
             return relu
 
     def _fc_layer(self, bottom, name, num_classes=None,
@@ -208,7 +208,7 @@ class FCN8VGG:
 
             if relu:
                 bias = tf.nn.relu(bias)
-            _activation_summary(bias)
+            _activation_summary(bias,self.summary)
 
             if debug:
                 bias = tf.Print(bias, [tf.shape(bias)],
@@ -239,7 +239,7 @@ class FCN8VGG:
             conv_biases = self._bias_variable([num_classes], constant=0.0)
             bias = tf.nn.bias_add(conv, conv_biases)
 
-            _activation_summary(bias)
+            _activation_summary(bias,self.summary)
 
             return bias
 
@@ -278,7 +278,7 @@ class FCN8VGG:
                                   message='Shape of %s' % name,
                                   summarize=4, first_n=1)
 
-        _activation_summary(deconv)
+        _activation_summary(deconv,self.summary)
         return deconv
 
     def get_deconv_filter(self, f_shape):
@@ -313,7 +313,7 @@ class FCN8VGG:
                                        name='weight_loss')
             tf.add_to_collection(tf.GraphKeys.REGULARIZATION_LOSSES,
                                  weight_decay)
-        _variable_summaries(var)
+        _variable_summaries(var,self.summary)
         return var
 
     def get_bias(self, name, num_classes=None):
@@ -326,7 +326,7 @@ class FCN8VGG:
         init = tf.constant_initializer(value=bias_wights,
                                        dtype=tf.float32)
         var = tf.get_variable(name="biases", initializer=init, shape=shape)
-        _variable_summaries(var)
+        _variable_summaries(var,self.summary)
         return var
 
     def get_fc_weight(self, name):
@@ -339,7 +339,7 @@ class FCN8VGG:
                                        name='weight_loss')
             tf.add_to_collection(tf.GraphKeys.REGULARIZATION_LOSSES,
                                  weight_decay)
-        _variable_summaries(var)
+        _variable_summaries(var,self.summary)
         return var
 
     def _bias_reshape(self, bweight, num_orig, num_new):
@@ -420,7 +420,7 @@ class FCN8VGG:
             weight_decay = tf.multiply(
                 tf.nn.l2_loss(var), wd, name='weight_loss')
             tf.add_to_collection(collection_name, weight_decay)
-        _variable_summaries(var)
+        _variable_summaries(var,self.summary)
         return var
 
     def _add_wd_and_summary(self, var, wd, collection_name=None):
@@ -430,14 +430,14 @@ class FCN8VGG:
             weight_decay = tf.multiply(
                 tf.nn.l2_loss(var), wd, name='weight_loss')
             tf.add_to_collection(collection_name, weight_decay)
-        _variable_summaries(var)
+        _variable_summaries(var,self.summary)
         return var
 
     def _bias_variable(self, shape, constant=0.0):
         initializer = tf.constant_initializer(constant)
         var = tf.get_variable(name='biases', shape=shape,
                               initializer=initializer)
-        _variable_summaries(var)
+        _variable_summaries(var,self.summary)
         return var
 
     def get_fc_weight_reshape(self, name, shape, num_classes=None):
@@ -454,36 +454,38 @@ class FCN8VGG:
         return var
 
 
-def _activation_summary(x):
-    """Helper to create summaries for activations.
+def _activation_summary(x, summary=False):
+    if summary:
+        """Helper to create summaries for activations.
 
-    Creates a summary that provides a histogram of activations.
-    Creates a summary that measure the sparsity of activations.
+        Creates a summary that provides a histogram of activations.
+        Creates a summary that measure the sparsity of activations.
 
-    Args:
-      x: Tensor
-    Returns:
-      nothing
-    """
-    # Remove 'tower_[0-9]/' from the name in case this is a multi-GPU training
-    # session. This helps the clarity of presentation on tensorboard.
-    tensor_name = x.op.name
-    # tensor_name = re.sub('%s_[0-9]*/' % TOWER_NAME, '', x.op.name)
-    tf.summary.histogram(tensor_name + '/activations', x)
-    tf.summary.scalar(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
+        Args:
+        x: Tensor
+        Returns:
+        nothing
+        """
+        # Remove 'tower_[0-9]/' from the name in case this is a multi-GPU training
+        # session. This helps the clarity of presentation on tensorboard.
+        tensor_name = x.op.name
+        # tensor_name = re.sub('%s_[0-9]*/' % TOWER_NAME, '', x.op.name)
+        tf.summary.histogram(tensor_name + '/activations', x)
+        tf.summary.scalar(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
 
 
-def _variable_summaries(var):
-    """Attach a lot of summaries to a Tensor."""
-    if not tf.get_variable_scope().reuse:
-        name = var.op.name
-        logging.info("Creating Summary for: %s" % name)
-        with tf.name_scope('summaries'):
-            mean = tf.reduce_mean(var)
-            tf.summary.scalar(name + '/mean', mean)
-            with tf.name_scope('stddev'):
-                stddev = tf.sqrt(tf.reduce_sum(tf.square(var - mean)))
-            tf.summary.scalar(name + '/sttdev', stddev)
-            tf.summary.scalar(name + '/max', tf.reduce_max(var))
-            tf.summary.scalar(name + '/min', tf.reduce_min(var))
-            tf.summary.histogram(name, var)
+def _variable_summaries(var, summary=False):
+    if summary:
+        """Attach a lot of summaries to a Tensor."""
+        if not tf.get_variable_scope().reuse:
+            name = var.op.name
+            logging.info("Creating Summary for: %s" % name)
+            with tf.name_scope('summaries'):
+                mean = tf.reduce_mean(var)
+                tf.summary.scalar(name + '/mean', mean)
+                with tf.name_scope('stddev'):
+                    stddev = tf.sqrt(tf.reduce_sum(tf.square(var - mean)))
+                tf.summary.scalar(name + '/sttdev', stddev)
+                tf.summary.scalar(name + '/max', tf.reduce_max(var))
+                tf.summary.scalar(name + '/min', tf.reduce_min(var))
+                tf.summary.histogram(name, var)
