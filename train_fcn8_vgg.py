@@ -32,8 +32,8 @@ parser.add_argument('--num_classes', dest='num_classes', type=int, default=19, h
 
 parser.add_argument('--resize', dest='resize', action='store_true', help='resize input images, default full_res no resize')
 parser.set_defaults(resize=False)
-parser.add_argument('--load_size_w', dest='load_size_w', type=int, default=2048, help='scale images to this size')
-parser.add_argument('--load_size_h', dest='load_size_h', type=int, default=1024, help='scale images to this size')
+parser.add_argument('--image_width', dest='image_width', type=int, default=2048, help='scale images to this size')
+parser.add_argument('--image_height', dest='image_height', type=int, default=1024, help='scale images to this size')
 
 parser.add_argument('--crop', dest='crop', action='store_true', help='crop input images, default no crop')
 parser.set_defaults(crop=False)
