@@ -52,7 +52,10 @@ logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
 if not os.path.exists("checkpoint"):
     os.makedirs("checkpoint")
 
-with tf.Session() as sess:
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+
+with tf.Session(config=config) as sess:
     ### build net ###
     image,_,image_sem= build_input(args.input_list_train)
     if args.resize:
@@ -79,15 +82,18 @@ with tf.Session() as sess:
         loss = loss(logits,input_sem_gt,19)
         pred = vgg_fcn.pred_up
     
+    lr = tf.placeholder(tf.float32)
+
     summary_image = tf.summary.merge([
         tf.summary.image("image",input_images),
         tf.summary.image("sem_gt",color_tensorflow(input_sem_gt)),
         tf.summary.image("sem_pred",color_tensorflow(tf.expand_dims(pred,axis=-1)))])
     
     summary_scalar = tf.summary.merge([
-        tf.summary.scalar("cross_entropy", loss)])
+        tf.summary.scalar("cross_entropy", loss),
+        tf.summary.scalar("lr", lr)])
 
-    optim = tf.train.AdamOptimizer(args.lr, args.beta1).minimize(loss)
+    optim = tf.train.AdamOptimizer(lr, args.beta1).minimize(loss)
 
     print('Finished building Network.')
     
@@ -113,16 +119,18 @@ with tf.Session() as sess:
     print('Running the Network')
     
     total_time = 0
-    for step in range(start_step, args.steps):
+    for step in range(start_step, args.steps): 
         start_time = time.time()
-        
-        loss_value, _ , images,gt= sess.run([loss,optim,input_images,input_sem_gt])
+
+        lr_value = ((1e-2-1)*args.lr*step)/args.steps + 1e-4
+
+        loss_value, _ , images,gt= sess.run([loss,optim,input_images,input_sem_gt],feed_dict={lr: lr_value})
         
         total_time += time.time() - start_time
         time_left = (args.steps - step - 1)*total_time/(step + 1 - start_step)
 
         if step%10==0:
-            summary_string = sess.run(summary_scalar)
+            summary_string = sess.run(summary_scalar,feed_dict={lr: lr_value})
             writer.add_summary(summary_string,step)
             print("Step " , step, " loss: ",loss_value, "Time left: ", datetime.timedelta(seconds=time_left))
 
