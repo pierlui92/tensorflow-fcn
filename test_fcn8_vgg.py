@@ -18,8 +18,8 @@ parser.add_argument('--num_classes', dest='num_classes', type=int, default=19, h
 
 parser.add_argument('--resize', dest='resize', action='store_true', help='resize input images, default full_res no resize')
 parser.set_defaults(resize=False)
-parser.add_argument('--load_size_w', dest='load_size_w', type=int, default=2048, help='scale images to this size')
-parser.add_argument('--load_size_h', dest='load_size_h', type=int, default=1024, help='scale images to this size')
+parser.add_argument('--image_width', dest='image_width', type=int, default=2048, help='scale images to this size')
+parser.add_argument('--image_height', dest='image_height', type=int, default=1024, help='scale images to this size')
 
 args = parser.parse_args()
 
@@ -30,6 +30,7 @@ with tf.Session() as sess:
     image,image_path,image_sem= build_input(args.input_list_val_test)
 
     if args.resize:
+        orig_shape = tf.shape(image)
         image=tf.image.resize_images(image,[args.image_height,args.image_width])
         image_sem=tf.image.resize_images(image_sem,[args.image_height,args.image_width],method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
 
@@ -37,6 +38,8 @@ with tf.Session() as sess:
         vgg_fcn = FCN8VGG()
         vgg_fcn.build(tf.expand_dims(image,axis=0), debug=False, num_classes=args.num_classes)
         pred = vgg_fcn.pred_up
+        if args.resize:
+            pred = tf.image.resize_images(pred, orig_shape[1:3],method=tf.image.ResizeMethod.Nearest_Neighbor)
 
     saver = tf.train.Saver()
 
