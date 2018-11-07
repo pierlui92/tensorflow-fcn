@@ -1,14 +1,10 @@
 #!/usr/bin/env python
 
 import os
-import scipy as scp
-import scipy.misc
 from loss import loss
 import numpy as np
-import logging
 import tensorflow as tf
 from tensorflow.python.framework import ops
-import sys
 import datetime
 from input_manager import *
 from models.fcn8_vgg import FCN8VGG
@@ -45,10 +41,6 @@ parser.set_defaults(summary_image=True)
 
 args = parser.parse_args()
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
-                    level=logging.INFO,
-                    stream=sys.stdout)
-
 if not os.path.exists("checkpoint"):
     os.makedirs("checkpoint")
 
@@ -72,12 +64,13 @@ with tf.Session(config=config) as sess:
         image = tf.image.crop_to_bounding_box(image, crop_offset_h, crop_offset_w, args.crop_size_h, args.crop_size_w)          
         image_sem = tf.image.crop_to_bounding_box(image_sem, crop_offset_h, crop_offset_w, args.crop_size_h, args.crop_size_w)          
 
+    ### AUGMENTATION ###
+
     input_images,input_sem_gt = tf.train.shuffle_batch([image,image_sem],args.batch_size,30,10,8)
     
     with tf.name_scope("content_vgg"):
         vgg_fcn = FCN8VGG()
-        #### RICORDARSI DI REINSERIRE DROPOUT!!! TRAIN=TRUE!! ####
-        vgg_fcn.build(input_images, debug=False, num_classes=args.num_classes)
+        vgg_fcn.build(input_images, train=True, debug=False, num_classes=args.num_classes)
         logits= vgg_fcn.upscore32
         loss = loss(logits,input_sem_gt,19)
         pred = vgg_fcn.pred_up
